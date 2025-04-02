@@ -1,1 +1,9 @@
-<p>books-display works!</p>
+<div class="book-container">
+    @for (b of books(); track b.title) {
+        <div class="book-card">
+            <span>{{ b.title }} by {{ b.author }}</span>
+        </div>
+    } @empty {
+        <p>No books added yet!</p>
+    }
+</div>

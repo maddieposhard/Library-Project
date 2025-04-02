@@ -1,6 +1,6 @@
 export interface Book {
-    Title: string;
-    Author: string;
-    Genre: string[];
-    Description: string;
+    title: string;
+    author: string;
+    genre: string[];
+    description: string;
 }
