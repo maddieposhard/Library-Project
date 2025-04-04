@@ -1,29 +1,16 @@
 import { Injectable, signal } from '@angular/core';
 import { Book } from '../models/book.model';
+import { userData } from '../../../../public/assets/data/userData';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
+private userData = signal<User[]>(userData)
+
 private books = signal<Book[]>([
-  {
-    title: 'The Silent Patient',
-    author: 'Alex Michaelides',
-    genre: ['Thriller, Crime, Fiction'],
-    description: 'A psychological thriller about a famous painter who shoots her husband and then never speaks again.'
-},
-{
-    title: 'The Housemaid',
-    author: 'Freida McFadden',
-    genre: ['Thriller, Crime, Fiction'],
-    description: 'It tells the story of Millie Calloway, a young woman with a criminal past who becomes a live-in housekeeper for a wealthy family.'
-},
-{
-    title: 'Local Woman Missing',
-    author: 'Mary Kubica',
-    genre: ['Thriller, Crime, Fiction'],
-    description: 'A seemingly peaceful community is shaken when a local woman vanishes, and years later, her young daughter suddenly reappears, unraveling a web of long-buried secrets.' 
-}
+  ...userData.map((user: User) => user.ownedBooks).flat()
 ]);
 
 getBooks () {

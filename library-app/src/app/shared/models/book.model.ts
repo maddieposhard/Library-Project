@@ -3,4 +3,6 @@ export interface Book {
     author: string;
     genre: string[];
     description: string;
+    image: string;
+    isbn: number
 }

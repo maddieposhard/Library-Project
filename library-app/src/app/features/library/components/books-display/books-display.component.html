@@ -1,7 +1,8 @@
 <div class="book-container">
     @for (b of books(); track b.title) {
         <div class="book-card">
-            <span>{{ b.title }} by {{ b.author }}</span>
+            <div>{{ b.title }} <br> by {{ b.author }}</div>
+            <div><img [src]="getImagePath(b)" class="image"/></div>
         </div>
     } @empty {
         <p>No books added yet!</p>
