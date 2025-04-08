@@ -1,0 +1,15 @@
+.image {
+    height: 200px;
+    width: 150px;
+}
+
+.book-container {
+    display: inline-flex;
+    justify-content: space-around;
+}
+
+.book-card {
+    border: 2px black solid;
+    height: 300px;
+    width: 200px;
+}

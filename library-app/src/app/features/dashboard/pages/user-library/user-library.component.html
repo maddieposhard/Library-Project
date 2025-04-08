@@ -1,1 +1,17 @@
-<p>user-library works!</p>
+<ng-content>
+<div class="book-container">
+    @for (b of books; track b.title) {
+        <div class="book-card">
+            <div>{{ b.title }} <br> by {{ b.author }}</div>
+            <div><img [src]="getImagePath(b)" class="image"/></div>
+        </div>
+    } @empty {
+        <p>No books added yet!</p>
+    }
+</div>
+</ng-content>
+
+
+
+
+

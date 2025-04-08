@@ -3,16 +3,16 @@ import { BookService } from '../../../../shared/services/book.service';
 import { Book } from '../../../../shared/models/book.model';
 
 @Component({
-  selector: 'app-user-library',
+  selector: 'app-friend-library',
   imports: [],
-  templateUrl: './user-library.component.html',
-  styleUrl: './user-library.component.css'
+  templateUrl: './friend-library.component.html',
+  styleUrl: './friend-library.component.css'
 })
-export class UserLibraryComponent {
+export class FriendLibraryComponent {
   private bookService = inject(BookService)
 
-  books = this.bookService.getUserBooks('01')
-
+  books = this.bookService.getBooks()
+  
   getImagePath (book: Book) {
     return '/assets/book-images/' + book.image;
   }

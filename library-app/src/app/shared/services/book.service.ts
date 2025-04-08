@@ -16,4 +16,9 @@ private books = signal<Book[]>([
 getBooks () {
   return this.books.asReadonly()
 }
+
+getUserBooks(userId: string): Book[] {
+  const user = userData.find(user => user.id === userId);
+  return user ? user.ownedBooks : [];
+}
 }
