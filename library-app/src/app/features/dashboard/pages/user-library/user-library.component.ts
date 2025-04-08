@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { BookService } from '../../../../shared/services/book.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserService } from '../../../../shared/services/user.service';
 import { Book } from '../../../../shared/models/book.model';
 
 @Component({
@@ -8,12 +8,22 @@ import { Book } from '../../../../shared/models/book.model';
   templateUrl: './user-library.component.html',
   styleUrl: './user-library.component.css'
 })
-export class UserLibraryComponent {
-  private bookService = inject(BookService)
+export class UserLibraryComponent implements OnInit {
+ownedBooks: Book[] = [];
 
-  books = this.bookService.getUserBooks('01')
+private userService = inject(UserService)
 
-  getImagePath (book: Book) {
-    return '/assets/book-images/' + book.image;
-  }
+ngOnInit() {
+  this.ownedBooks = this.userService.getCurrentUser().ownedBooks;
 }
+
+getImagePath (book: Book) {
+  return '/assets/book-images/' + book.image;
+}
+}
+
+// private bookService = inject(BookService)
+
+// books = this.bookService.getUserBooks('01')
+
+

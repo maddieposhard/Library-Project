@@ -1,7 +1,7 @@
 <div class="dashboard">
-    <button (click)="displayFriendsBooks()">Friend Library</button>
-    <button (click)="displayUserLibrary()">My Library</button>
-    <button (click)="displayBorrowedBooks()">Borrowed Books</button>
+    <button [routerLink]="['/friend']" routerLinkActive="router-link-active" >Friend Library</button>
+    <button routerLink="/user">My Library</button>
+    <button>Borrowed Books</button>
 
     
     

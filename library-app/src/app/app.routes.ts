@@ -1,8 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardPageComponent } from './features/dashboard/pages/dashboard-page/dashboard-page.component';
-import { BooksDisplayComponent } from './features/library/components/books-display/books-display.component';
 import { UserLibraryComponent } from './features/dashboard/pages/user-library/user-library.component';
 import { NgModule } from '@angular/core';
+import { FriendLibraryComponent } from './features/dashboard/pages/friend-library/friend-library.component';
 
 export const routes: Routes = [
     {
@@ -10,13 +10,17 @@ export const routes: Routes = [
         component: DashboardPageComponent,
     },
     {
-        path: 'friends',
-        component: BooksDisplayComponent
-    },
-    {
         path: 'user',
         component: UserLibraryComponent
-    }
+    },
+    {
+        path: 'friend',
+        component: FriendLibraryComponent
+    },
+    // {
+    //     path: 'borrowed',
+    //     component: BorrowedBooksComponent
+    // }
 
 ];
 

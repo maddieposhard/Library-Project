@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { BookService } from '../../../../shared/services/book.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { Book } from '../../../../shared/models/book.model';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-friend-library',
@@ -8,10 +8,15 @@ import { Book } from '../../../../shared/models/book.model';
   templateUrl: './friend-library.component.html',
   styleUrl: './friend-library.component.css'
 })
-export class FriendLibraryComponent {
-  private bookService = inject(BookService)
+export class FriendLibraryComponent implements OnInit {
+friendBooks: Book[] = [];
 
-  books = this.bookService.getBooks()
+private userService = inject(UserService)
+
+ngOnInit() {
+  const friends = this.userService.getFriendsLibraries();
+  this.friendBooks = friends.map(user => user.ownedBooks).flat();
+}
   
   getImagePath (book: Book) {
     return '/assets/book-images/' + book.image;
