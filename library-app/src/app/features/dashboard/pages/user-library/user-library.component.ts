@@ -6,24 +6,22 @@ import { Book } from '../../../../shared/models/book.model';
   selector: 'app-user-library',
   imports: [],
   templateUrl: './user-library.component.html',
-  styleUrl: './user-library.component.css'
+  styleUrl: './user-library.component.css',
 })
 export class UserLibraryComponent implements OnInit {
-ownedBooks: Book[] = [];
+  ownedBooks: Book[] = [];
 
-private userService = inject(UserService)
+  private userService = inject(UserService);
 
-ngOnInit() {
-  this.ownedBooks = this.userService.getCurrentUser().ownedBooks;
-}
+  ngOnInit() {
+    this.ownedBooks = this.userService.getCurrentUser().ownedBooks;
+  }
 
-getImagePath (book: Book) {
-  return '/assets/book-images/' + book.image;
-}
+  getImagePath(book: Book) {
+    return '/assets/book-images/' + book.image;
+  }
 }
 
 // private bookService = inject(BookService)
 
 // books = this.bookService.getUserBooks('01')
-
-

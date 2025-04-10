@@ -17,7 +17,7 @@ export class UserService {
 
   getCurrentUser(): User { 
     return this.users().find(user => user.id === this.currentUserId)!;
-  }
+  } //add get current user handler in user library component, do the same for the others
 
   getFriendsLibraries(): User[] { 
     return this.users().filter(user => user.id !== this.currentUserId);

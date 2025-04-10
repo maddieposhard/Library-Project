@@ -55,17 +55,4 @@ section {
     margin-bottom: 1rem;
 }
   
-.details-button {
-    align-self: flex-start;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-  
-.details-button:hover {
-    background-color: #0056b3;
-}
+
