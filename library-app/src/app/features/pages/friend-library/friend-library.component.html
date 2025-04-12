@@ -1,0 +1,27 @@
+<div class="book-container">
+    @for (b of friendBooks; track b.title) {
+        <div class="book-card">
+            <div><img [src]="getImagePath(b)" class="image"/></div>
+            <div class="book-info">
+                <p class="title">{{ b.title }}</p> 
+                <p class="author"> by {{ b.author }}</p>
+                <button class="more-details" (click)="showModal = true">More Details</button>
+                <button class="rent" (click)="rentBook(b)">Borrow Book</button>
+            </div>
+
+        </div>
+    } @empty {
+        <p>No books added yet!</p>
+    }
+</div>
+
+<div class="modal-backdrop">
+    @if (showModal) {
+        @for (b of friendBooks; track b.isbn) {
+        <div class="modal">
+          <h2>{{ b.title }} by {{ b.author }}</h2>
+          <p>{{ b.description }}</p>
+          <button (click)="showModal = false">Close</button>
+        </div>
+    }}
+</div>

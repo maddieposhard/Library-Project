@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService } from '../../../../shared/services/user.service';
-import { Book } from '../../../../shared/models/book.model';
+import { UserService } from '../../../shared/services/user.service';
+import { Book } from '../../../shared/models/book.model';
 
 @Component({
   selector: 'app-user-library',

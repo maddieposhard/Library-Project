@@ -1,19 +1,21 @@
 <ng-content>
-    <section>
+    <div class="book-container">
     @for (b of ownedBooks; track b.title) {
         <div class="book-card">
             <img [src]="getImagePath(b)" class="image"/>
             <div class="book-info">
                 <p class="title">{{ b.title }}</p> 
                 <p class="author"> by {{ b.author }}</p>
-                <button class="details">More Details</button>
+                <button class="more-details">More Details</button>
+                <button class="edit-btn">Edit</button>
+                <button class="remove">Remove</button>
             </div>
 
         </div>
     } @empty {
         <p>No books added yet!</p>
     }
-    </section>
+    </div>
 </ng-content>
 
 
