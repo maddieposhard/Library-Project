@@ -148,7 +148,45 @@ button {
   transform: scale(1.05);
 }
 
-@keyframes fadeIn {
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal input[type="text"],
+  .modal input[type="number"] {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-family: "Poppins", sans-serif;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .modal input[type="text"]:focus,
+  .modal input[type="number"]:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.4);
+    outline: none;
+  }
+  
+  .submit-btn {
+    background: #bbf7d0;
+    color: #064e3b;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .submit-btn:hover {
+    background: #86efac;
+    transform: scale(1.05);
+  }
+  
+
+@keyframes fadeIn { 
   from {
     opacity: 0;
     transform: translateY(10px);

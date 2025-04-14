@@ -1,7 +1,7 @@
 <div class="book-container">
   @for (b of friendBooks; track b.isbn) {
   <div class="book-card">
-    <div><img [src]="getImagePath(b)" class="image" /></div>
+    <div><img [src]="getImagePathHandler(b)" class="image" /></div>
     <div class="book-info">
       <p class="title">{{ b.title }}</p>
       <p class="author">by {{ b.author }}</p>

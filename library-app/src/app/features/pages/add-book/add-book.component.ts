@@ -10,10 +10,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-book.component.css',
 })
 export class AddBookComponent {
-  private userService = inject(UserService);
-  private Books = signal<Book[]>([]);
+  private userService = inject(UserService); // injects the userService to access its functions and properties
 
-  public book = signal<Book>({
+  public book = signal<Book>({ // book object to be added
     title: '',
     author: '',
     genre: [],
@@ -22,7 +21,7 @@ export class AddBookComponent {
     isbn: 0,
   });
 
-  addBookHandler(book: Book) {
+  addBookHandler(book: Book) { // handler function that calls the addBook function from the userService when a button is pressed
     this.userService.addBook(book);
     // console.log('Book added:', book);
   }

@@ -1,7 +1,7 @@
 <div class="book-container">
   @for (b of userBooks(); track b.title) {
   <div class="book-card">
-    <img [src]="getImagePath(b)" class="image" />
+    <img [src]="getImagePathHandler(b)" class="image" />
     <div class="book-info">
       <p class="title">{{ b.title }}</p>
       <p class="author">by {{ b.author }}</p>
@@ -29,14 +29,14 @@
         <div class="modal-backdrop">
             <div class="modal">
                 <form action="submit">
-                    <input type="text" name="title" placeholder='{{bookToEdit.title}}' required>
-                    <input type="text" name="author" placeholder="{{bookToEdit.author}}" required>
-                    <input type="text" name="genre" placeholder="{{bookToEdit.genre}}" required>
-                    <input type="text" name="description" placeholder="{{bookToEdit.description}}" required>
-                    <input type="text" name="imageURL" placeholder="{{bookToEdit.image}}">
-                    <input type="number" name="isbn" placeholder="{{bookToEdit.isbn}}" required>
+                    <input type="text" name="title" placeholder='{{bookToEdit.title}}' required [(ngModel)]="title">
+                    <input type="text" name="author" placeholder="{{bookToEdit.author}}" required [(ngModel)]="author">
+                    <input type="text" name="genre" placeholder="{{bookToEdit.genre}}" required [(ngModel)]="genre">
+                    <input type="text" name="description" placeholder="{{bookToEdit.description}}" required [(ngModel)]="description">
+                    <input type="text" name="imageURL" placeholder="{{bookToEdit.image}}" [(ngModel)]="image">
+                    <input type="number" name="isbn" placeholder="{{bookToEdit.isbn}}" required [(ngModel)]="isbn">
                 </form>
-                <button class="submit-btn">Submit</button>
+                <button class="submit-btn" (click)="submitEdit()">Submit</button>
                 <button (click)="bookToEdit = null">Close</button>
             </div>
         </div>
