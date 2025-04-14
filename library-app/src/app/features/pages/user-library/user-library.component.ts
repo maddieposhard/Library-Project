@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Book } from '../../../shared/models/book.model';
 
@@ -8,20 +8,25 @@ import { Book } from '../../../shared/models/book.model';
   templateUrl: './user-library.component.html',
   styleUrl: './user-library.component.css',
 })
-export class UserLibraryComponent implements OnInit {
-  ownedBooks: Book[] = [];
+export class UserLibraryComponent {
+  public userBooks = inject(UserService).ownedBooks;
+  selectedBook: Book | null = null;
+  bookToEdit: Book | null = null;
 
-  private userService = inject(UserService);
-
-  ngOnInit() {
-    this.ownedBooks = this.userService.getCurrentUser().ownedBooks;
+  showModal(book: Book) {
+    this.selectedBook = book;
   }
+
 
   getImagePath(book: Book) {
-    return '/assets/book-images/' + book.image;
+    if (book.image.includes('https://')) {
+      return book.image;
+    } else {
+      return '/assets/book-images/' + book.image;
+    }
   }
+
+  editBook(book: Book) {
+    this.bookToEdit = book;
+    }
 }
-
-// private bookService = inject(BookService)
-
-// books = this.bookService.getUserBooks('01')

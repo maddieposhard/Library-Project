@@ -1,24 +1,44 @@
-<ng-content>
-    <div class="book-container">
-    @for (b of ownedBooks; track b.title) {
-        <div class="book-card">
-            <img [src]="getImagePath(b)" class="image"/>
-            <div class="book-info">
-                <p class="title">{{ b.title }}</p> 
-                <p class="author"> by {{ b.author }}</p>
-                <button class="more-details">More Details</button>
-                <button class="edit-btn">Edit</button>
-                <button class="remove">Remove</button>
-            </div>
-
-        </div>
-    } @empty {
-        <p>No books added yet!</p>
-    }
+<div class="book-container">
+  @for (b of userBooks(); track b.title) {
+  <div class="book-card">
+    <img [src]="getImagePath(b)" class="image" />
+    <div class="book-info">
+      <p class="title">{{ b.title }}</p>
+      <p class="author">by {{ b.author }}</p>
+      <button class="more-details" (click)="showModal(b)">More Details</button>
+      <button class="edit-btn" (click)="editBook(b)">Edit</button>
+      <button class="remove">Remove</button>
     </div>
-</ng-content>
+  </div>
+  } @empty {
+  <p>No books added yet!</p>
+  }
+</div>
+@if (selectedBook) {
+<div class="modal-backdrop">
+  <div class="modal">
+    <h2>{{ selectedBook.title }} by {{ selectedBook.author }}</h2>
+    <p>{{ selectedBook.description }}</p>
+    <button (click)="selectedBook = null">Close</button>
+  </div>
+</div>
+}
 
-
-
-
-
+<div>
+    @if (bookToEdit) {
+        <div class="modal-backdrop">
+            <div class="modal">
+                <form action="submit">
+                    <input type="text" name="title" placeholder='{{bookToEdit.title}}' required>
+                    <input type="text" name="author" placeholder="{{bookToEdit.author}}" required>
+                    <input type="text" name="genre" placeholder="{{bookToEdit.genre}}" required>
+                    <input type="text" name="description" placeholder="{{bookToEdit.description}}" required>
+                    <input type="text" name="imageURL" placeholder="{{bookToEdit.image}}">
+                    <input type="number" name="isbn" placeholder="{{bookToEdit.isbn}}" required>
+                </form>
+                <button class="submit-btn">Submit</button>
+                <button (click)="bookToEdit = null">Close</button>
+            </div>
+        </div>
+    }
+</div>

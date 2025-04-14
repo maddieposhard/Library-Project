@@ -1,1 +1,46 @@
-<p>add-book works!</p>
+<form (ngSubmit)="addBookHandler(book())">
+  <div class="form-group">
+    <input
+      type="text"
+      name="title"
+      placeholder="Title"
+      required
+      [(ngModel)]="book().title"
+    />
+    <input
+      type="text"
+      name="author"
+      placeholder="Author"
+      required
+      [(ngModel)]="book().author"
+    />
+    <input
+      type="text"
+      name="genre"
+      placeholder="Genre"
+      required
+      [(ngModel)]="book().genre"
+    />
+    <input
+      type="text"
+      name="description"
+      placeholder="Description"
+      required
+      [(ngModel)]="book().description"
+    />
+    <input
+      type="text"
+      name="imageURL"
+      placeholder="Image URL"
+      [(ngModel)]="book().image"
+    />
+    <input
+      type="number"
+      name="isbn"
+      placeholder="ISBN"
+      required
+      [(ngModel)]="book().isbn"
+    />
+    <button class="submit-btn">Submit</button>
+  </div>
+</form>

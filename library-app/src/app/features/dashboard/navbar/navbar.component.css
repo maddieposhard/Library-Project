@@ -1,31 +1,31 @@
 .dashboard {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
 }
 
 .dashboard button {
-    background: #fcd5ce;
-    color: #5c1a1b;
-    border: none;
-    border-radius: 999px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, transform 0.2s ease;
-    font-family: 'Poppins', sans-serif;
+  background: #fcd5ce;
+  color: #5c1a1b;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-family: "Poppins", sans-serif;
 }
 
 .dashboard button:hover {
-    background: #fbb1a8;
-    transform: scale(1.05);
+  background: #fbb1a8;
+  transform: scale(1.05);
 }
 
 .dashboard button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(252, 213, 206, 0.6);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(252, 213, 206, 0.6);
 }
