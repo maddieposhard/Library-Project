@@ -18,11 +18,32 @@ export class AddBookComponent {
     genre: [],
     description: '',
     image: '',
-    isbn: 0,
+    isbn: null,
   });
 
   addBookHandler(book: Book) { // handler function that calls the addBook function from the userService when a button is pressed
-    this.userService.addBook(book);
-    // console.log('Book added:', book);
+    if (
+      !book.title ||
+      !book.author ||
+      !book.genre.length ||
+      !book.description ||
+      !book.isbn
+    ) {
+      alert('Please fill in all required fields before submitting the book.');
+      return;
+    }
+    //checks to see if any fields are empty and alerts user if they are, ensures empty book won't be added
+
+    this.userService.addBook(book); // calls the addBook function from the userService
+    
+    this.book.set({
+      title: '',
+      author: '',
+      genre: [],
+      description: '',
+      image: '',
+      isbn: null,
+    });
+    //resets the book object to empty values after adding the book
   }
 }

@@ -1,3 +1,4 @@
+<!-- @for (user of friends; track user.id) { -->
 <div class="book-container">
   @for (b of friendBooks; track b.isbn) {
   <div class="book-card">
@@ -6,15 +7,18 @@
       <p class="title">{{ b.title }}</p>
       <p class="author">by {{ b.author }}</p>
       <button class="more-details" (click)="showModal(b)">More Details</button>
-      <button class="rent" (click)="rentBook(b)">Borrow Book</button>
+      <button class="rent" (click)="rentBookHandler(b)">Borrow</button>
     </div>
   </div>
   } @empty {
   <p>No books added yet!</p>
   }
 </div>
+<!-- } -->
 
 @if (selectedBook) {
+    <!-- <app-more-details /> -->
+
 <div class="modal-backdrop">
   <div class="modal">
     <h2>{{ selectedBook.title }} by {{ selectedBook.author }}</h2>

@@ -8,14 +8,11 @@ import { UserService } from '../../../shared/services/user.service';
   templateUrl: './borrowed-books.component.html',
   styleUrl: './borrowed-books.component.css',
 })
-export class BorrowedBooksComponent implements OnInit {
-  borrowedBooks: Book[] = []; // array set in ngOnInit
+export class BorrowedBooksComponent  {
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
-  private userService = inject(UserService);
-  
-  ngOnInit() { // function runs on component initialization
-    this.borrowedBooks = this.userService.getCurrentUser().borrowedBooks; // gets the current user's borrowedBooks from the userService
-  }
+  private userService = inject(UserService); 
+  borrowedBooks = this.userService.getCurrentUser().borrowedBooks; // sets the value of borrowedBooks using the signal set in the userService
+
 
   showModal(book: Book) { // shows the modal with book details
     this.selectedBook = book;

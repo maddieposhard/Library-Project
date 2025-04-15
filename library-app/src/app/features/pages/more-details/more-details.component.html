@@ -1,1 +1,11 @@
-<p>more-details works!</p>
+<ng-content>
+    @if (selectedBook) {
+        <div class="modal-backdrop">
+          <div class="modal">
+            <h2>{{ selectedBook.title }} by {{ selectedBook.author }}</h2>
+            <p>{{ selectedBook.description }}</p>
+            <button (click)="selectedBook = null">Close</button>
+          </div>
+        </div>
+        }
+</ng-content>

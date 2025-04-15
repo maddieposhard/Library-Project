@@ -15,6 +15,7 @@ export class UserLibraryComponent {
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
 
+  // initial values set for two way binding
   title: string = '';
   author: string = '';
   genre: string = '';
@@ -23,6 +24,7 @@ export class UserLibraryComponent {
   isbn: number | null = null;
 
   getImagePathHandler(book: Book) {
+    // returns the image path for a book, main function in user service
     return this.userService.getImagePath(book);
   }
 
@@ -43,26 +45,29 @@ export class UserLibraryComponent {
   }
 
   submitEdit() {
-    if (!this.bookToEdit || this.isbn === null) return;
-  
+    if (!this.bookToEdit || this.isbn === null) return; // checks and returns if values are null
+
+    // creates a new book object with updated values
     const updatedBook: Book = {
       title: this.title,
       author: this.author,
       genre: [this.genre],
       description: this.description,
       image: this.image,
-      isbn: this.isbn
+      isbn: this.isbn,
     };
 
-  
+    // loops over owned books and if the isbn of the book matches the one being edited, it updates the book
     this.userService.ownedBooks.update((books) =>
-      books.map((book) =>
-        book.isbn === this.bookToEdit!.isbn ? updatedBook : book
-      )
+      books.map((book) => {
+        if (book.isbn === this.bookToEdit!.isbn) {
+          return updatedBook;
+        } else {
+          return book;
+        }
+      })
     );
-  
-    console.log('Book updated:', updatedBook);
-  
+
     // Close modal and reset
     this.bookToEdit = null;
   }

@@ -47,4 +47,11 @@ export class UserService {
     this.ownedBooks.update((books) => [...books, book]); //updates the ownedBooks signal with the new book added to the array
     console.log(this.ownedBooks());
   }
-}
+
+    borrowBook(book: Book) {
+      console.log('Borrowing book:', book);
+      this.borrowedBooks.update((books) => [...books, book]);  // adds the borrowed book to the borrowedBooks signal which was set for user 01 in the constructor
+      console.log('Updated borrowed books:', this.borrowedBooks());
+    }
+    }
+// }

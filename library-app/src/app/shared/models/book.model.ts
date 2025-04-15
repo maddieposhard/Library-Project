@@ -4,5 +4,5 @@ export interface Book {
   genre: string[];
   description: string;
   image: string;
-  isbn: number;
+  isbn: number | null;
 }
