@@ -1,5 +1,5 @@
 <div class="book-container">
-  @for (b of borrowedBooks; track b.isbn) {
+  @for (b of borrowedBooks(); track b.isbn) {
   <div class="book-card">
     <div><img [src]="getImagePathHandler(b)" class="image" /></div>
     <div class="book-info">
@@ -10,7 +10,7 @@
     </div>
   </div>
   } @empty {
-  <p class="backup-message">No books added yet!</p>
+  <p class="backup-message">No books borrowed yet!</p>
   }
 </div>
 @if (selectedBook) {

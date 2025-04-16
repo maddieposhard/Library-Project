@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Book } from '../../../shared/models/book.model';
 import { UserService } from '../../../shared/services/user.service';
-import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-add-book',
-  imports: [FormsModule],
+  imports: [SharedModule],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css',
 })

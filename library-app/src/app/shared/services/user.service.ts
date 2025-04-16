@@ -49,6 +49,14 @@ export class UserService {
   }
 
     borrowBook(book: Book) {
+      const currentBooks = this.borrowedBooks();
+
+      const alreadyBorrowed = currentBooks.some(b => b.isbn === book.isbn); // checks to see if the book isbn matches a book isbn already in current books
+
+      if (alreadyBorrowed) {
+        alert('This book is already borrowed.'); // alerts the user if the book is already borrowed
+        return; // Exit early if it's already borrowed
+      }
       console.log('Borrowing book:', book);
       this.borrowedBooks.update((books) => [...books, book]);  // adds the borrowed book to the borrowedBooks signal which was set for user 01 in the constructor
       console.log('Updated borrowed books:', this.borrowedBooks());

@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Book } from '../../../shared/models/book.model';
-import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-user-library',
-  imports: [FormsModule],
+  imports: [SharedModule],
   templateUrl: './user-library.component.html',
   styleUrl: './user-library.component.css',
 })
