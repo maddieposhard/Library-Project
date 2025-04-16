@@ -1,5 +1,14 @@
+<div class="search-wrapper">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by title, author, or genre..."
+      class="search-input"
+    />
+</div>
+
 <div class="book-container">
-  @for (b of userBooks(); track b.title) {
+  @for (b of filteredBooks(); track b.title) {
   <div class="book-card">
     <img [src]="getImagePathHandler(b)" class="image" />
     <div class="book-info">
@@ -7,7 +16,7 @@
       <p class="author">by {{ b.author }}</p>
       <button class="more-details" (click)="showModal(b)">More Details</button>
       <button class="edit-btn" (click)="editBook(b)">Edit</button>
-      <button class="remove">Remove</button>
+      <button class="remove" (click)="removeBookHandler(b)">Remove</button>
     </div>
   </div>
   } @empty {

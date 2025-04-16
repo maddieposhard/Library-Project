@@ -3,4 +3,18 @@
   <button routerLink="/user">My Library</button>
   <button routerLink="/borrowed">Borrowed Books</button>
   <button routerLink="/add">Add Book</button>
+  <br>
+  <!-- <input
+  type="text"
+  [(ngModel)]="searchTerm"
+  placeholder="Search by title, genre, or author"
+  class="p-2 border rounded w-full"
+/>
+
+@for (book of filteredBooks(); track book.isbn) {
+    <div class="book-card">
+      <h3>{{ book.title }}</h3>
+      <p>by {{ book.author }} ({{ book.genre }})</p>
+    </div>
+  } -->
 </div>

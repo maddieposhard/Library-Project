@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Book } from '../../../shared/models/book.model';
 import { SharedModule } from '../../../shared/shared.module';
+import Fuse from 'fuse.js';
 
 @Component({
   selector: 'app-user-library',
@@ -11,9 +12,12 @@ import { SharedModule } from '../../../shared/shared.module';
 })
 export class UserLibraryComponent {
   private userService = inject(UserService);
-  public userBooks = inject(UserService).ownedBooks; //accesses ownedBooks from the userService
+  private userBooks = inject(UserService).ownedBooks; //accesses ownedBooks from the userService
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
+  filteredBooks = signal<Book[]>(this.userBooks()); // initially set to userBooks
+  searchTerm = signal('');
+
 
   // initial values set for two way binding
   title: string = '';
@@ -31,6 +35,11 @@ export class UserLibraryComponent {
   showModal(book: Book) {
     // shows the modal with book details
     this.selectedBook = book;
+  }
+
+  removeBookHandler(book: Book) {
+    // removes the book from the user library
+    this.userService.removeBook(book);
   }
 
   editBook(book: Book) {
@@ -71,4 +80,35 @@ export class UserLibraryComponent {
     // Close modal and reset
     this.bookToEdit = null;
   }
+
+  fuse = new Fuse(this.userBooks(), {
+    keys: ['title', 'author', 'genre'],
+    includeScore: true,
+    threshold: 0.4,
+  });
+
+  constructor() {
+    effect(() => {
+      this.fuse.setCollection(this.userBooks());
+      this.applySearch();
+    });
+  
+    effect(() => {
+      this.applySearch();
+    });
+  }
+
+
+  applySearch() {
+    const term = this.searchTerm().trim();
+    if (!term) {
+      this.filteredBooks.set(this.userBooks());
+      return;
+    }
+
+    const results = this.fuse.search(term);
+    this.filteredBooks.set(results.map(r => r.item));
+  }
+  
+  
 }

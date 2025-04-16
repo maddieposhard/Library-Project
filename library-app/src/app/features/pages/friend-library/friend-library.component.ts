@@ -1,16 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { Book } from '../../../shared/models/book.model';
 import { UserService } from '../../../shared/services/user.service';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-friend-library',
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './friend-library.component.html',
   styleUrl: './friend-library.component.css',
 })
 export class FriendLibraryComponent implements OnInit {
   private userService = inject(UserService);
-  friendBooks: Book[] = []; // array set in ngOnInit
+  public friendBooks: Book[] = []; // array set in ngOnInit
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   private friends = this.userService.getFriendsLibraries(); // gets the friends user objects from the userService
   borrowedBooks = this.userService.borrowedBooks; // sets the value of borrowedBooks using the signal set in the userService

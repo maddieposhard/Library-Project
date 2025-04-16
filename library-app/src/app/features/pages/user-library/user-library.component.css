@@ -196,3 +196,26 @@ button {
     transform: translateY(0);
   }
 }
+
+.search-wrapper {
+    max-width: 500px;
+    margin: 2rem auto 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+  }
