@@ -13,10 +13,10 @@ import Fuse from 'fuse.js';
 export class UserLibraryComponent {
   private userService = inject(UserService);
   private userBooks = inject(UserService).ownedBooks; //accesses ownedBooks from the userService
+  public filteredBooks = inject(UserService).filteredBooks // initially set to userBooks
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
-  filteredBooks = signal<Book[]>(this.userBooks()); // initially set to userBooks
-  searchTerm = signal('');
+
 
 
   // initial values set for two way binding
@@ -81,34 +81,34 @@ export class UserLibraryComponent {
     this.bookToEdit = null;
   }
 
-  fuse = new Fuse(this.userBooks(), {
-    keys: ['title', 'author', 'genre'],
-    includeScore: true,
-    threshold: 0.4,
-  });
+  // fuse = new Fuse(this.userBooks(), {
+  //   keys: ['title', 'author', 'genre'],
+  //   includeScore: true,
+  //   threshold: 0.4,
+  // });
 
-  constructor() {
-    effect(() => {
-      this.fuse.setCollection(this.userBooks());
-      this.applySearch();
-    });
+  // constructor() {
+  //   effect(() => {
+  //     this.fuse.setCollection(this.userBooks());
+  //     this.applySearch();
+  //   });
   
-    effect(() => {
-      this.applySearch();
-    });
-  }
+  //   effect(() => {
+  //     this.applySearch();
+  //   });
+  // }
 
 
-  applySearch() {
-    const term = this.searchTerm().trim();
-    if (!term) {
-      this.filteredBooks.set(this.userBooks());
-      return;
-    }
+  // applySearch() {
+  //   const term = this.searchTerm().trim();
+  //   if (!term) {
+  //     this.filteredBooks.set(this.userBooks());
+  //     return;
+  //   }
 
-    const results = this.fuse.search(term);
-    this.filteredBooks.set(results.map(r => r.item));
-  }
+  //   const results = this.fuse.search(term);
+  //   this.filteredBooks.set(results.map(r => r.item));
+  // }
   
   
 }

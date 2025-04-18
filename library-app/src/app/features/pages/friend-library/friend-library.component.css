@@ -1,28 +1,6 @@
-.book-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-  background: #f9f9fb;
-}
 
-.book-card {
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
-.book-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.image {
+/* .image {
   width: 100%;
   height: 350px;
   object-fit: cover;
@@ -45,7 +23,7 @@
   font-size: 0.95rem;
   color: #777;
   margin-bottom: 1rem;
-}
+} */
 
 button {
   border: none;

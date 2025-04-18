@@ -10,15 +10,14 @@ export class UserService {
   private users = signal<User[]>(userData);
   public ownedBooks = signal<Book[]>([]);
   public borrowedBooks = signal<Book[]>([]);
-  private allBooks = signal<Book[]>([]); 
+  private friendBooks = signal<Book[]>([]); 
+  filteredBooks = signal<Book[]>(this.ownedBooks()); // initially set to userBooks
+
   private currentUserId = '01'; // this should be dynamically set based on the logged-in user
+
 
   getCurrentUser(): User {
     return this.users().find((user) => user.id === this.currentUserId)!;
-  }
-
-  getAllBooks() {
-    return this.allBooks;
   }
 
   constructor() {
@@ -26,9 +25,8 @@ export class UserService {
     this.ownedBooks.set([...owned]); // sets the ownedBooks signal to the current user's owned books
     const borrowed = this.getCurrentUser().borrowedBooks;
     this.borrowedBooks.set([...borrowed]); // sets the borrowedBooks signal to the current user's borrowed books
-    const all = this.users().map((user) => user.ownedBooks).flat(); // gets all books from all users
-    this.allBooks.set([...all]); // sets the allBooks signal to all books from all users
-    
+    const friends = this.getFriendsLibraries(); // gets the friends libraries
+    this.friendBooks.set([...friends.map((user) => user.ownedBooks).flat()]); // flattens the array of friends ownedBooks into a single array of books
   }
 
   getFriendsLibraries(): User[] {
@@ -83,4 +81,5 @@ export class UserService {
       console.log('Updated borrowed books:', this.borrowedBooks());
     }
     }
-// }
+
+
