@@ -14,7 +14,9 @@ import { SearchBarComponent } from "../../dashboard/search-bar/search-bar.compon
 export class UserLibraryComponent {
   private searchService = inject(SearchService);
   private userService = inject(UserService);
+
   public userFilteredBooks = this.searchService.userFilteredBooks; // sets the value of filteredBooks using the signal set in the searchService
+  
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
 
@@ -42,7 +44,7 @@ export class UserLibraryComponent {
   }
 
   editBook(book: Book) {
-    // shows the modal with book details for editing prepopulated in a form
+    // shows the modal with book details for editing prepopulated using two way binding in a form by setting a book to edit and making it truthie
     this.bookToEdit = book;
     this.title = book.title;
     this.author = book.author;
@@ -55,7 +57,7 @@ export class UserLibraryComponent {
   submitEdit() {
     if (!this.bookToEdit || this.isbn === null) return; // checks and returns if values are null
 
-    // creates a new book object with updated values
+    // creates a new book object with updated values from the form
     const updatedBook: Book = {
       title: this.title,
       author: this.author,

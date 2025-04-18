@@ -7,17 +7,15 @@ import { Book } from '../models/book.model';
   providedIn: 'root',
 })
 export class UserService {
-
   private users = signal<User[]>(userData);
   public ownedBooks = signal<Book[]>([]);
   public borrowedBooks = signal<Book[]>([]);
-  private friendBooks = signal<Book[]>([]); 
   filteredBooks = signal<Book[]>(this.ownedBooks()); // initially set to userBooks
 
   private currentUserId = '01'; // this should be dynamically set based on the logged-in user
 
 
-  getCurrentUser(): User {
+  getCurrentUser(): User { // returns the user object that matches the currentUserId
     return this.users().find((user) => user.id === this.currentUserId)!;
   }
 
@@ -26,11 +24,9 @@ export class UserService {
     this.ownedBooks.set([...owned]); // sets the ownedBooks signal to the current user's owned books
     const borrowed = this.getCurrentUser().borrowedBooks;
     this.borrowedBooks.set([...borrowed]); // sets the borrowedBooks signal to the current user's borrowed books
-    const friends = this.getFriendsLibraries(); // gets the friends libraries
-    this.friendBooks.set([...friends.map((user) => user.ownedBooks).flat()]); // flattens the array of friends ownedBooks into a single array of books
   }
 
-  getFriendsLibraries(): User[] {
+  getFriendsLibraries(): User[] { 
     return this.users().filter((user) => user.id !== this.currentUserId); //returns all users except the current user
   }
 
@@ -46,13 +42,13 @@ export class UserService {
   removeBook(book: Book) {
     this.ownedBooks.update((books) =>
     books.filter((b) => b.isbn !== book.isbn)
-    ); // filters out the removed book from the ownedBooks signal
+    ); // filters out the book from the ownedBooks signal and returns an updated array that has books that do not match the isbn of the book being removed
   }
 
   returnBook(book: Book) {
     this.borrowedBooks.update((books) =>
       books.filter((b) => b.isbn !== book.isbn)
-    ); // filters out the returned book from the borrowedBooks signal
+    ); // filters out the returned book from the borrowedBooks signal using the same method as above
     console.log('Book returned:', book);
   }
 
@@ -60,27 +56,25 @@ export class UserService {
     const currentBooks = this.ownedBooks(); // gets the current owned books
 
     const alreadyOwned = currentBooks.some(b => b.isbn === book.isbn); // checks to see if the book isbn matches a book isbn already in current books
+    
     if (alreadyOwned) {
       alert('This book is already owned.'); // alerts the user if the book is already owned
       return; // Exit early if it's already owned
     }
     this.ownedBooks.update((books) => [...books, book]); //updates the ownedBooks signal with the new book added to the array
-    console.log(this.ownedBooks());
   }
 
-    borrowBook(book: Book) {
-      const currentBooks = this.borrowedBooks();
+  borrowBook(book: Book) {
+    const currentBooks = this.borrowedBooks();
 
-      const alreadyBorrowed = currentBooks.some(b => b.isbn === book.isbn); // checks to see if the book isbn matches a book isbn already in current books
+    const alreadyBorrowed = currentBooks.some(b => b.isbn === book.isbn); // checks to see if the book isbn matches a book isbn already in current books
 
-      if (alreadyBorrowed) {
-        alert('This book is already borrowed.'); // alerts the user if the book is already borrowed
-        return; // Exit early if it's already borrowed
-      }
-      console.log('Borrowing book:', book);
-      this.borrowedBooks.update((books) => [...books, book]);  // adds the borrowed book to the borrowedBooks signal which was set for user 01 in the constructor
-      console.log('Updated borrowed books:', this.borrowedBooks());
+    if (alreadyBorrowed) {
+      alert('This book is already borrowed.'); // alerts the user if the book is already borrowed
+      return; // Exit early if it's already borrowed
     }
-    }
+    this.borrowedBooks.update((books) => [...books, book]);  // adds the borrowed book to the borrowedBooks signal which was set for user 01 in the constructor
+  }
+  }
 
 

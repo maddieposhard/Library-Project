@@ -14,7 +14,9 @@ import { SearchBarComponent } from "../../dashboard/search-bar/search-bar.compon
 export class FriendLibraryComponent {
   private userService = inject(UserService);
   private searchService = inject(SearchService)
+
   public friendBooks = this.searchService.friendFilteredBooks;
+  
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   borrowedBooks = this.userService.borrowedBooks; // sets the value of borrowedBooks using the signal set in the userService
   
@@ -27,11 +29,7 @@ export class FriendLibraryComponent {
   }
 
   borrowBookHandler(book: Book) {
-    // this.userService.getCurrentUser().borrowedBooks.update(book); // I want to fix this and use .set or .update but I'm getting bugs
-    console.log('Book rented:', book) 
-    console.log('Current borrowed books:', this.userService.getCurrentUser().borrowedBooks);
-      this.userService.borrowBook(book);
-
+      this.userService.borrowBook(book); // calls borrowBook function from userService
     }
   }
 

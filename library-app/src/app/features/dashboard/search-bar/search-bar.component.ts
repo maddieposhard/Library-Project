@@ -16,5 +16,5 @@ export class SearchBarComponent {
   friendFilteredBooks = this.searchService.friendFilteredBooks;
 
   // Bind the search term input to the signal
-  searchTerm = this.searchService.searchTerm;
+  public searchTerm = this.searchService.searchTerm;
 }
