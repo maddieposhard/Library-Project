@@ -1,8 +1,10 @@
-
+<div class="search-container">
+    <app-search-bar />
+</div>
 
 <!-- @for (user of friends; track user.id) { -->
 <div class="book-container">
-  @for (b of friendBooks; track b.isbn) {
+  @for (b of friendBooks(); track b.isbn) {
   <div class="book-card">
     <div><img [src]="getImagePathHandler(b)" class="image" /></div>
     <div class="book-info">
@@ -13,13 +15,12 @@
     </div>
   </div>
   } @empty {
-  <p>No books added yet!</p>
+  <p class="backup-message">No books added yet!</p>
   }
 </div>
-<!-- } -->
+
 
 @if (selectedBook) {
-    <!-- <app-more-details /> -->
 
 <div class="modal-backdrop">
   <div class="modal">

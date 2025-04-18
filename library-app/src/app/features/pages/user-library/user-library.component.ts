@@ -1,23 +1,22 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Book } from '../../../shared/models/book.model';
 import { SharedModule } from '../../../shared/shared.module';
-import Fuse from 'fuse.js';
+import { SearchService } from '../../../shared/services/search.service';
+import { SearchBarComponent } from "../../dashboard/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-user-library',
-  imports: [SharedModule],
+  imports: [SharedModule, SearchBarComponent],
   templateUrl: './user-library.component.html',
   styleUrl: './user-library.component.css',
 })
 export class UserLibraryComponent {
+  private searchService = inject(SearchService);
   private userService = inject(UserService);
-  private userBooks = inject(UserService).ownedBooks; //accesses ownedBooks from the userService
-  public filteredBooks = inject(UserService).filteredBooks // initially set to userBooks
+  public userFilteredBooks = this.searchService.userFilteredBooks; // sets the value of filteredBooks using the signal set in the searchService
   selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
   bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
-
-
 
   // initial values set for two way binding
   title: string = '';
@@ -80,35 +79,5 @@ export class UserLibraryComponent {
     // Close modal and reset
     this.bookToEdit = null;
   }
-
-  // fuse = new Fuse(this.userBooks(), {
-  //   keys: ['title', 'author', 'genre'],
-  //   includeScore: true,
-  //   threshold: 0.4,
-  // });
-
-  // constructor() {
-  //   effect(() => {
-  //     this.fuse.setCollection(this.userBooks());
-  //     this.applySearch();
-  //   });
-  
-  //   effect(() => {
-  //     this.applySearch();
-  //   });
-  // }
-
-
-  // applySearch() {
-  //   const term = this.searchTerm().trim();
-  //   if (!term) {
-  //     this.filteredBooks.set(this.userBooks());
-  //     return;
-  //   }
-
-  //   const results = this.fuse.search(term);
-  //   this.filteredBooks.set(results.map(r => r.item));
-  // }
-  
   
 }

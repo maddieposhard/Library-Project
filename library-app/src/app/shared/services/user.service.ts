@@ -7,6 +7,7 @@ import { Book } from '../models/book.model';
   providedIn: 'root',
 })
 export class UserService {
+
   private users = signal<User[]>(userData);
   public ownedBooks = signal<Book[]>([]);
   public borrowedBooks = signal<Book[]>([]);

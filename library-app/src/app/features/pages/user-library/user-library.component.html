@@ -1,14 +1,10 @@
-<!-- <div class="search-wrapper">
-    <input
-      type="text"
-      [(ngModel)]="searchTerm"
-      placeholder="Search by title, author, or genre..."
-      class="search-input"
-    />
-</div> -->
+<div class="search-container">
+    <app-search-bar />
+</div>
+
 
 <div class="book-container">
-  @for (b of filteredBooks(); track b.title) {
+  @for (b of userFilteredBooks(); track b.title) {
   <div class="book-card">
     <img [src]="getImagePathHandler(b)" class="image" />
     <div class="book-info">
@@ -20,7 +16,7 @@
     </div>
   </div>
   } @empty {
-  <p>No books added yet!</p>
+  <p class="backup-message">No books added yet!</p>
   }
 </div>
 @if (selectedBook) {
