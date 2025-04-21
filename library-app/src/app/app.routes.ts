@@ -4,28 +4,40 @@ import { NgModule } from '@angular/core';
 import { FriendLibraryComponent } from './features/pages/friend-library/friend-library.component';
 import { BorrowedBooksComponent } from './features/pages/borrowed-books/borrowed-books.component';
 import { AddBookComponent } from './features/pages/add-book/add-book.component';
+import { LoginComponent } from './features/pages/login/login.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+
 
 export const routes: Routes = [
   {
     path: '',
-    component: UserLibraryComponent,
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'user',
     component: UserLibraryComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'friend',
     component: FriendLibraryComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'borrowed',
     component: BorrowedBooksComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'add',
-    component: AddBookComponent
-  }
+    component: AddBookComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

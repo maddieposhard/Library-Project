@@ -36,3 +36,22 @@ header h2 {
     padding: 0 1rem;
   }
 }
+
+.logout-container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout-btn {
+    background: #fcd5ce;
+    color: #5c1a1b;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #fbb1a8;
+    transform: scale(1.05);
+}
+

@@ -18,7 +18,7 @@ export class SearchService {
     effect(() => {
       // set inital values for user and friend books
       const userBooks = this.userService.ownedBooks();
-      const friendBooks = this.userService.getFriendsLibraries().flatMap((u) => u.ownedBooks); // flatten the array of friends ownedBooks into a single array of books
+      const friendBooks = this.userService.friendBooks(); 
       const term = this.searchTerm();
 
       // if there is no search, this sets the filteredBooks to the original books arrays

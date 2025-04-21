@@ -1,8 +1,14 @@
-<header>
-  <h1>Book Buds</h1>
-  <h2>
-    “There are no faster or firmer friendships than those formed between people
-    who love the same books. ― Irving Stone
-  </h2>
-</header>
-<app-navbar />
+<header class="header">
+    <div class="logout-container">
+      <button class="logout-btn" (click)="logoutHandler()">Log Out</button>
+    </div>
+    <div class="header-center">
+      <h1>Book Buds</h1>
+      <h2>
+        “There are no faster or firmer friendships than those formed between people
+        who love the same books.” ― Irving Stone
+      </h2>
+    </div>
+  </header>
+  
+  <app-navbar />

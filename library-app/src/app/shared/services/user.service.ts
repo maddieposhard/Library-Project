@@ -10,24 +10,31 @@ export class UserService {
   private users = signal<User[]>(userData);
   public ownedBooks = signal<Book[]>([]);
   public borrowedBooks = signal<Book[]>([]);
+  public friendBooks = signal<Book[]>([]) 
   filteredBooks = signal<Book[]>(this.ownedBooks()); // initially set to userBooks
+  
 
-  private currentUserId = '01'; // this should be dynamically set based on the logged-in user
+  private currentUserId = signal<string | null>('01');
 
 
   getCurrentUser(): User { // returns the user object that matches the currentUserId
-    return this.users().find((user) => user.id === this.currentUserId)!;
+    return this.users().find((user) => user.id === this.currentUserId())!;
   }
 
-  constructor() {
-    const owned = this.getCurrentUser().ownedBooks;
-    this.ownedBooks.set([...owned]); // sets the ownedBooks signal to the current user's owned books
-    const borrowed = this.getCurrentUser().borrowedBooks;
-    this.borrowedBooks.set([...borrowed]); // sets the borrowedBooks signal to the current user's borrowed books
+  setCurrentUser(id: string | null) { 
+    this.currentUserId.set(id!); // sets the current user id to the id passed in
+    const user = this.getCurrentUser(); // gets the current user object
+    this.ownedBooks.set([...user.ownedBooks]); // sets the ownedBooks signal to the current user's owned books
+    this.borrowedBooks.set([...user.borrowedBooks]); // sets the borrowedBooks signal to the current user's borrowed books
+    this.friendBooks.set(this.getFriendsLibraries().flatMap((u) => u.ownedBooks)); // flatten the array of friends ownedBooks into a single array of books
+  }
+
+  getAllUsers(): User[] {
+    return this.users(); // returns all users
   }
 
   getFriendsLibraries(): User[] { 
-    return this.users().filter((user) => user.id !== this.currentUserId); //returns all users except the current user
+    return this.users().filter((user) => user.id !== this.currentUserId()); //returns all users except the current user
   }
 
   getImagePath(book: Book) {
@@ -47,14 +54,13 @@ export class UserService {
 
   returnBook(book: Book) {
     this.borrowedBooks.update((books) =>
-      books.filter((b) => b.isbn !== book.isbn)
-    ); // filters out the returned book from the borrowedBooks signal using the same method as above
-    console.log('Book returned:', book);
+      books.filter((b) => b.isbn !== book.isbn)); // filters out the returned book from the borrowedBooks signal using the same method as above
+    this.friendBooks.update((books) => [...books, book]); // adds the returned book back to the friendBooks signal
+    // would like to add an order system so they aren't returned to the bottom of the array
   }
 
   addBook(book: Book) {
     const currentBooks = this.ownedBooks(); // gets the current owned books
-
     const alreadyOwned = currentBooks.some(b => b.isbn === book.isbn); // checks to see if the book isbn matches a book isbn already in current books
     
     if (alreadyOwned) {
@@ -74,6 +80,7 @@ export class UserService {
       return; // Exit early if it's already borrowed
     }
     this.borrowedBooks.update((books) => [...books, book]);  // adds the borrowed book to the borrowedBooks signal which was set for user 01 in the constructor
+    this.friendBooks.update((books) => books.filter((b) => b.isbn !== book.isbn)) // filters out the borrowed book from the friendBooks signal
   }
   }
 
