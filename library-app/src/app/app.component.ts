@@ -12,8 +12,8 @@ import { AuthService } from './shared/services/auth.service';
 export class AppComponent {
   title = 'library-app';
   private authService = inject(AuthService);
-  
-  isAuthenticated = signal(false); // default to false
+
+  isAuthenticated = signal<boolean>(false); // default to false
 
   constructor() {
     this.authService.getAuthStatus().subscribe((status) => {

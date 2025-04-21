@@ -12,26 +12,23 @@ export class AuthService {
   private router = inject(Router);
 
   login(username: string, password: string): Observable<boolean> {
-    const user = this.userService
-      .getAllUsers()
-      .find((u) => u.username === username && u.password === password);
+    const user = this.userService.getAllUsers().find((u) => u.username === username && u.password === password); // returns a user if found, otherwise undefined
 
-    if (user) {
+    if (user) { // if user is found, set isAuthenticated to true and set current user
       this.isAuthenticated.next(true);
       this.userService.setCurrentUser(user.id);
-      return this.isAuthenticated.asObservable();
+    } else {
+      this.isAuthenticated.next(false);
     }
-
-    this.isAuthenticated.next(false);
-    return this.isAuthenticated.asObservable();
+    return this.getAuthStatus(); // return the authentication status
   }
 
-  getAuthStatus(): Observable<boolean> {
+  getAuthStatus(): Observable<boolean> { // get the current authentication status
     return this.isAuthenticated.asObservable();
   }
 
   logout() {
-    console.log('hi');
+    // console.log('hi');
     this.router.navigate(['/login']);
     this.isAuthenticated.next(false);
     this.userService.setCurrentUser(null);

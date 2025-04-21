@@ -13,7 +13,7 @@ export class HeaderComponent {
 
 
   logoutHandler() {
-    console.log('got hereeeee') // need to debug
+    console.log('got hereeeee') // need to debug 
     this.authService.logout();
   }
 

@@ -1,6 +1,6 @@
 <div class="login-wrapper">
     <h1 class="login-title">Welcome!</h1>
-    <form (ngSubmit)="loginHandler()" class="login-form">
+    <form class="login-form">
       <input
         type="text"
         [(ngModel)]="username"
@@ -17,6 +17,6 @@
         class="login-input"
         required
       />
-      <button type="submit" class="login-button">Login</button>
+      <button type="submit" class="login-button" (click)="loginHandler()">Login</button>
     </form>
   </div>

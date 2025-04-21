@@ -4,7 +4,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  password: string; // Insecure in real-world apps!
+  password: string; 
   ownedBooks: Book[];
   borrowedBooks: Book[];
 }

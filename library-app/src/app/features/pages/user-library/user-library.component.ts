@@ -15,10 +15,10 @@ export class UserLibraryComponent {
   private searchService = inject(SearchService);
   private userService = inject(UserService);
 
-  public userFilteredBooks = this.searchService.userFilteredBooks; // sets the value of filteredBooks using the signal set in the searchService
+  public userBooks = this.searchService.userFilteredBooks; // sets the value of filteredBooks using the signal set in the searchService
   
-  selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
-  bookToEdit: Book | null = null; // starts as null, selects a book when clicked for editing in a modal
+  selectedBook: Book | null = null; // selects a book when clicked for viewing details in a modal
+  bookToEdit: Book | null = null; // selects a book when clicked for editing in a modal
 
   // initial values set for two way binding
   title: string = '';
@@ -34,7 +34,7 @@ export class UserLibraryComponent {
   }
 
   showModal(book: Book) {
-    // shows the modal with book details
+    // shows the modal with book details by making selectedBook truthie
     this.selectedBook = book;
   }
 

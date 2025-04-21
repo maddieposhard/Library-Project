@@ -16,8 +16,8 @@ export class FriendLibraryComponent {
   private searchService = inject(SearchService)
 
   public friendBooks = this.searchService.friendFilteredBooks;
-  
-  selectedBook: Book | null = null; // starts as null, selects a book when clicked for viewing details in a modal
+
+  selectedBook: Book | null = null; // selects a book when clicked for viewing details in a modal
   borrowedBooks = this.userService.borrowedBooks; // sets the value of borrowedBooks using the signal set in the userService
   
   showModal(book: Book) { // shows the modal with book details

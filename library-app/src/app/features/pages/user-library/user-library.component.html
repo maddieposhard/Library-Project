@@ -4,7 +4,7 @@
 
 
 <div class="book-container">
-  @for (b of userFilteredBooks(); track b.title) {
+  @for (b of userBooks(); track b.title) {
   <div class="book-card">
     <img [src]="getImagePathHandler(b)" class="image" />
     <div class="book-info">

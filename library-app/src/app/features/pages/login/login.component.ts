@@ -12,17 +12,14 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
-  isAuth = false;
   username = '';
   password = '';
 
+  
   loginHandler() {
-    this.authService
-      .login(this.username, this.password)
-      .subscribe((authStatus) => {
-        this.isAuth = authStatus;
-        if (authStatus) {
-          this.router.navigate(['/user']);
+    this.authService.login(this.username, this.password).subscribe((authStatus) => {  //subscribe to observable from login function, name it authStatus
+        if (authStatus) { // if authStatus is true navigate to user component
+          this.router.navigate(['/user']); 
         } else {
           alert('Invalid username or password');
         }

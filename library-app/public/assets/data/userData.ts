@@ -5,7 +5,7 @@ export const userData: User[] = [
     id: '01',
     username: 'mposhard',
     email: 'poshardmadeline@gmail.com',
-    password: '1', // Insecure in real-world apps!
+    password: 'password123', 
     ownedBooks: [
       {
         title: 'The Silent Patient',
